@@ -6,6 +6,10 @@
     cursor: pointer;
 }
 
-.user > div:nth-child(3) {
+.user__name {
+    font-weight: 800;
+}
+
+.user__email {
     margin-top: 20px;
 }

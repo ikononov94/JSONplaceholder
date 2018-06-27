@@ -22,7 +22,7 @@ const comments = (
 
             action.payload.forEach((comment) => {
                 allIds.push(comment.id);
-                byId[comment.postId] = comment;
+                byId[comment.id] = comment;
             })
 
             return {

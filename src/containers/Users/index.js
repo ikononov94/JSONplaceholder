@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import User from '../../components/User';
 import { fetchUsers } from '../../actions/users';
@@ -34,9 +35,15 @@ class Users extends Component {
        <div className="slider-previous" onClick={this.prevUsers}></div>
         <div className="slider-users" ref={this.container}>
           { 
-            usersAllIds.map((userId) => (
-              <User userInfo={usersById[userId]} key={userId} />
-            ))
+            usersAllIds.map((userId) => {
+              const userInfo = usersById[userId];
+
+              return (
+                <Link to={`user/${userInfo.id}`} key={userId} className="link">
+                  <User userInfo={userInfo} />
+                </Link>
+              )
+            })
           }
         </div>
         <div className="slider-next" onClick={this.nextUsers}></div>
