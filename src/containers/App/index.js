@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter  } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Users from '../Users'
 import UserPosts from '../UserPosts';
@@ -23,6 +24,9 @@ class App extends Component {
     }
 }
 
+App.propTypes = {
+    fetchUsers: PropTypes.func.isRequired,
+}
 
 export default withRouter(connect(
     null,

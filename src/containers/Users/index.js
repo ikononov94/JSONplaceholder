@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import User from '../../components/User';
 import './style.css';
@@ -46,6 +47,12 @@ class Users extends Component {
       </div>
     );
   }
+}
+
+Users.propTypes = {
+  usersById: PropTypes.object,
+  usersAllIds: PropTypes.array,
+  isFetching: PropTypes.bool.isRequired,
 }
 
 export default connect(

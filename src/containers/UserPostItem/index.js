@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import User from '../../components/User';
 import Comment from '../../components/Comment';
@@ -54,6 +55,19 @@ class UserPostItem extends Component {
             </React.Fragment>
         )
     }
+}
+
+UserPostItem.propTypes = {
+    usersById: PropTypes.object,
+    post: PropTypes.shape({
+        title: PropTypes.string,
+        body: PropTypes.string,
+    }),
+    commentsById: PropTypes.object,
+    commentsAllIds: PropTypes.array,
+    isFetching: PropTypes.bool.isRequired,
+    fetchPost: PropTypes.func.isRequired,
+    fetchCommentsByPostId: PropTypes.func.isRequired,
 }
 
 export default connect(

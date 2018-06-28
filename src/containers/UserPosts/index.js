@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import User from '../../components/User';
 import Spinner from '../../components/Spinner';
@@ -49,6 +50,14 @@ class UserPosts extends Component {
             </React.Fragment>
         )
     }
+}
+
+UserPosts.propTypes = {
+    usersById: PropTypes.object,
+    postsById: PropTypes.object,
+    postsAllIds: PropTypes.array,
+    isFetching: PropTypes.bool.isRequired,
+    fetchPostsByUserId: PropTypes.func.isRequired,
 }
 
 export default connect(
