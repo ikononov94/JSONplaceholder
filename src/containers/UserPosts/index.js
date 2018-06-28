@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import User from '../../components/User';
+import Spinner from '../../components/Spinner';
 import { fetchPostsByUserId } from '../../actions/posts';
 
 class UserPosts extends Component {
@@ -11,7 +12,9 @@ class UserPosts extends Component {
     }
 
     render() {
-        const { usersById, match, postsById, postsAllIds } = this.props;
+        const { usersById, match, postsById, postsAllIds, isFetching } = this.props;
+
+        if(isFetching) return <Spinner />
 
         return (
             <React.Fragment>

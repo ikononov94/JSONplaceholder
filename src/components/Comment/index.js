@@ -4,9 +4,9 @@ import './style.css';
 
 const Comment = ({ author }) => (
     <div className="author">
-        <div className="author-name">{author.name}</div>
-        <div className="author-email">{author.email}</div>
-        <div className="author-body">{author.body}</div>
+        <div className="author__name">{author.name}</div>
+        <div className="author__email">{author.email}</div>
+        <div className="author__body">{author.body}</div>
     </div>
 )
 

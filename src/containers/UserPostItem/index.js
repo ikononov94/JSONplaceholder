@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchCommentsByPostId } from '../../actions/comments';
 import User from '../../components/User';
 import Comment from '../../components/Comment';
+import Spinner from '../../components/Spinner';
+import { fetchCommentsByPostId } from '../../actions/comments';
 
 class UserPostItem extends Component {
     componentDidMount() {
         this.props.fetchCommentsByPostId(this.props.match.params.postId);
-        console.log(this.props.match)
     }
 
     render() {
-        const { usersById, match, postsById, commentsById, commentsAllIds } = this.props;
+        const { usersById, match, postsById, commentsById, commentsAllIds, isFetching } = this.props;
         const post = postsById[match.params.postId];
-        console.log(commentsById);
+
+        if(isFetching) return <Spinner />
+
         return (
             <React.Fragment>
                 <User userInfo={usersById[postsById[match.params.postId].userId]} />
@@ -23,7 +25,7 @@ class UserPostItem extends Component {
                 <div className="post-comments">
                     {
                         commentsAllIds.map((commentId) => (
-                            <Comment author={commentsById[commentId]} />
+                            <Comment author={commentsById[commentId]} key={commentId}/>
                         ))
                     }
                 </div>
@@ -38,7 +40,7 @@ export default connect(
         postsById: state.posts.byId,
         commentsById: state.comments.byId,
         commentsAllIds: state.comments.allIds,
-        isFetching: state.posts.isFetchingComments,
+        isFetching: state.comments.isFetchingComments,
     }),
     dispatch => ({
         fetchCommentsByPostId: postId => dispatch(fetchCommentsByPostId(postId)),

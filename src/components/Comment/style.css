@@ -5,10 +5,10 @@
     margin: 10px;
 }
 
-.author-name {
+.author__name {
     font-weight: 800;
 }
 
-.author-email {
+.author__email {
     margin: 20px 0 10px 0;
 }
