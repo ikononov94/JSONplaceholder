@@ -6,28 +6,46 @@ import User from '../../components/User';
 import Spinner from '../../components/Spinner';
 import { fetchPostsByUserId } from '../../actions/posts';
 
+import './style.css';
+
 class UserPosts extends Component {
+    constructor(props) {
+        super(props);
+
+        this.userId = this.props.match.params.id || localStorage['userId'];
+    }
     componentDidMount() {
-        this.props.fetchPostsByUserId(this.props.match.params.id);
+        this.props.fetchPostsByUserId(this.userId);
     }
 
     render() {
-        const { usersById, match, postsById, postsAllIds, isFetching } = this.props;
+        const { usersById, postsById, postsAllIds, isFetching } = this.props;
 
         if(isFetching) return <Spinner />
 
         return (
             <React.Fragment>
-                <User userInfo={usersById[match.params.id]} />
+                { postsAllIds.length && 
+                <React.Fragment>
+                    <User userInfo={usersById[this.userId]} />
                     <div className="user-posts">
                         {
                             postsAllIds.map((postId) => (
                                 <Link to={`/post/${postId}`} key={postId} className="link">
-                                    <p className="post">{postId} {postsById[postId].title}</p>
+                                    <p className="post">
+                                        <span className="post__id">
+                                            {
+                                                parseInt(postId, 10) >= 10 ? postId : `0${postId}`
+                                            }
+                                        </span> 
+                                        {postsById[postId].title}
+                                    </p>
                                 </Link>
                             ))
                         }
                     </div>
+               </React.Fragment>
+                }
             </React.Fragment>
         )
     }

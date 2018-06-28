@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import User from '../../components/User';
-import { fetchUsers } from '../../actions/users';
 import './style.css';
 
 class Users extends Component {
@@ -14,9 +13,6 @@ class Users extends Component {
     this.prevUsers = this.prevUsers.bind(this);
     this.nextUsers = this.nextUsers.bind(this);
 
-  }
-  componentDidMount() {
-    this.props.fetchUsers();
   }
 
   prevUsers() {
@@ -39,7 +35,7 @@ class Users extends Component {
               const userInfo = usersById[userId];
 
               return (
-                <Link to={`user/${userInfo.id}`} key={userId} className="link">
+                <Link to={`/user/${userInfo.id}`} key={userId} className="link">
                   <User userInfo={userInfo} />
                 </Link>
               )
@@ -58,7 +54,5 @@ export default connect(
     usersAllIds: state.users.allIds,
     isFetching: state.users.isFetchingUsers,
   }),
-  dispatch => ({
-    fetchUsers: () => dispatch(fetchUsers())
-  })
+  null
 )(Users);
