@@ -6,6 +6,8 @@ export const fetchPostsByUserId = userId => (
             type: actionTypes.FETCH_POSTS_START,
         });
 
+        localStorage.setItem('userId', userId)
+
         try {
             const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
 
